@@ -1,0 +1,30 @@
+services:
+  backend:
+    build: server/
+    container_name: server_container
+    ports:
+      - 3001:3001 # porta padrão da aplicação
+    command: run dev # roda aplicação com nodemon
+    volumes:
+      # vincula pasta local com a dentro do container
+      - ./server/src:/app/src
+    .env_file:
+      - ./server/.env
+    depends_on:
+      db:
+        condition: service_healthy
+  db:
+    image: mysql:8.0.32
+    container_name: server_db
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: MyJobs
+    ports:
+      - 3306:3306
+    healthcheck:
+      # Deve aguardar o banco ficar operacional
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      timeout: 10s
+      retries: 5
+    volumes:
+      - ./database:/docker-entrypoint-initdb.d
