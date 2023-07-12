@@ -1,6 +1,10 @@
+version: '3'
+
 services:
   backend:
-    build: server/
+    build: 
+      context: ./server
+      dockerfile: Dockerfile
     container_name: server_container
     ports:
       - 3001:3001 # porta padrão da aplicação
@@ -8,7 +12,7 @@ services:
     volumes:
       # vincula pasta local com a dentro do container
       - ./server/src:/app/src
-    .env_file:
+    env_file:
       - ./server/.env
     depends_on:
       db:
