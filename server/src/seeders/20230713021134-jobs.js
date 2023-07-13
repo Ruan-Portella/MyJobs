@@ -8,7 +8,7 @@ module.exports = {
         await queryInterface.sequelize.query('ALTER TABLE Jobs AUTO_INCREMENT = 1;');
         return queryInterface.bulkInsert('Jobs', [
             {
-                jobTitle: 'Software Engineer',
+                companyName: 'Google',
                 jobLink: 'https://www.google.com',
                 createdAt: new Date(),
                 updatedAt: new Date(),
