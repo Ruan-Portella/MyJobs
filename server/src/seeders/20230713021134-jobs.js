@@ -10,6 +10,8 @@ module.exports = {
             {
                 jobTitle: 'Software Engineer',
                 jobLink: 'https://www.google.com',
+                createdAt: new Date(),
+                updatedAt: new Date(),
                 user_id: 1,
             },
         ], {});
