@@ -5,7 +5,7 @@ module.exports = (sequelize, DataTypes) => {
             primaryKey: true,
             type: DataTypes.INTEGER,
         },
-        jobTitle: DataTypes.STRING,
+        companyName: DataTypes.STRING,
         jobLink: { type: DataTypes.STRING, unique: true },
         userId: { type: DataTypes.INTEGER, foreignKey: true },
     }, {
