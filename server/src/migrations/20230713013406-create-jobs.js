@@ -12,9 +12,9 @@ module.exports = {
                 primaryKey: true,
                 type: Sequelize.INTEGER,
             },
-            jobTitle: {
+            companyName: {
                 allowNull: false,
-                field: 'job_title',
+                field: 'company_name',
                 type: Sequelize.STRING,
             },
             jobLink: {
