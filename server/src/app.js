@@ -1,6 +1,7 @@
-/* eslint-disable import/no-extraneous-dependencies */
 const express = require('express');
 const cors = require('cors');
+const userRouter = require('./routes/user.router');
+const authRouter = require('./routes/auth.router');
 require('dotenv').config();
 
 const app = express();
@@ -10,8 +11,7 @@ app.use(cors({
     allowedHeaders: ['Content-Type', 'Authorization'],
 }));
 
-app.get('/', (req, res) => {
-    res.status(200).json({ message: 'Hello World!' });
-});
+app.use('/', authRouter);
+app.use('/user', userRouter);
 
 module.exports = app;
