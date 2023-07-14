@@ -8,6 +8,10 @@ module.exports = (sequelize, DataTypes) => {
         fullName: DataTypes.STRING,
         email: DataTypes.STRING,
         password: DataTypes.STRING,
+    }, {
+        tableName: 'users',
+        underscored: true,
+        timestamps: false,
     });
 
     User.associate = (models) => {
