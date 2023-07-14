@@ -3,7 +3,7 @@ const validations = require('../middlewares');
 const authController = require('../controllers/auth.controller');
 
 authRouter.post(
-    '/',
+    '/signUp',
     validations.validateName,
     validations.validateEmail,
     validations.validatePassword,
@@ -11,7 +11,7 @@ authRouter.post(
 );
 
 authRouter.post(
-    '/signIn',
+    '/',
     validations.validateEmail,
     validations.validatePassword,
     authController.signInUser,
