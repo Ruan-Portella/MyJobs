@@ -7,6 +7,7 @@ module.exports = (sequelize, DataTypes) => {
         },
         companyName: DataTypes.STRING,
         jobLink: { type: DataTypes.STRING, unique: true },
+        jobStatus: { type: DataTypes.ENUM('active', 'rejected'), defaultValue: 'active' },
         userId: { type: DataTypes.INTEGER, foreignKey: true },
     }, {
         tableName: 'jobs',
