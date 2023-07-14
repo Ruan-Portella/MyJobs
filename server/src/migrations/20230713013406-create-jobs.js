@@ -23,6 +23,12 @@ module.exports = {
                 unique: true,
                 type: Sequelize.STRING,
             },
+            jobStatus: {
+                allowNull: false,
+                field: 'job_status',
+                type: Sequelize.ENUM('active', 'rejected'),
+                defaultValue: 'active',
+            },
             createdAt: {
                 allowNull: false,
                 field: 'created_at',
