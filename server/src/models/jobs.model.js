@@ -9,7 +9,7 @@ module.exports = (sequelize, DataTypes) => {
         jobLink: { type: DataTypes.STRING, unique: true },
         userId: { type: DataTypes.INTEGER, foreignKey: true },
     }, {
-        tableName: 'Jobs',
+        tableName: 'jobs',
         underscored: true,
         timestamps: true,
     });
