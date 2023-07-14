@@ -5,8 +5,8 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
     async up(queryInterface) {
-        await queryInterface.sequelize.query('ALTER TABLE Users AUTO_INCREMENT = 1;');
-        return queryInterface.bulkInsert('Users', [
+        await queryInterface.sequelize.query('ALTER TABLE users AUTO_INCREMENT = 1;');
+        return queryInterface.bulkInsert('users', [
             {
                 full_name: 'Ruan Portella',
                 email: 'ruanmorales29@gmail.com',
@@ -16,6 +16,6 @@ module.exports = {
     },
 
     async down(queryInterface) {
-        return queryInterface.bulkDelete('Users');
+        return queryInterface.bulkDelete('users');
     },
 };
