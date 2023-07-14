@@ -5,19 +5,19 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
     async up(queryInterface) {
-        await queryInterface.sequelize.query('ALTER TABLE Jobs AUTO_INCREMENT = 1;');
-        return queryInterface.bulkInsert('Jobs', [
+        // await queryInterface.sequelize.query('ALTER TABLE jobs AUTO_INCREMENT = 1;');
+        return queryInterface.bulkInsert('jobs', [
             {
-                companyName: 'Google',
-                jobLink: 'https://www.google.com',
-                createdAt: new Date(),
-                updatedAt: new Date(),
+                company_name: 'Google',
+                job_link: 'https://www.google.com',
+                created_at: new Date(),
+                updated_at: new Date(),
                 user_id: 1,
             },
         ], {});
     },
 
     async down(queryInterface) {
-        return queryInterface.bulkDelete('Jobs');
+        return queryInterface.bulkDelete('jobs');
     },
 };
