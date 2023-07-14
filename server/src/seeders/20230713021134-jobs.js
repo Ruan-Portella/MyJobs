@@ -5,11 +5,17 @@
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
     async up(queryInterface) {
-        // await queryInterface.sequelize.query('ALTER TABLE jobs AUTO_INCREMENT = 1;');
         return queryInterface.bulkInsert('jobs', [
             {
                 company_name: 'Google',
                 job_link: 'https://www.google.com',
+                created_at: new Date(),
+                updated_at: new Date(),
+                user_id: 1,
+            },
+            {
+                company_name: 'Ruan Portella',
+                job_link: 'https://www.ruanportella.dev',
                 created_at: new Date(),
                 updated_at: new Date(),
                 user_id: 1,
