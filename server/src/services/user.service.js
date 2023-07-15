@@ -21,19 +21,42 @@ const getAllUserJobs = async (id) => {
     return jobs;
 };
 
-const validateJobExist = async (companyName, jobLink) => {
-    const job = await Job.findOne({ where: { companyName, jobLink } });
+const validateJobExist = async (jobLink, userId) => {
+    const job = await Job.findOne({ where: { jobLink, userId } });
     return job;
 };
 
 const createJob = async ({ companyName, jobLink, userId }) => {
-    const jobExist = await validateJobExist(companyName, jobLink);
+    const jobExist = await validateJobExist(jobLink, userId);
     if (jobExist) return { message: 'Job already exists' };
     const job = await Job.create({ companyName, jobLink, userId });
     return job;
 };
 
+const updateJob = async ({
+    newCompanyName, jobLink, newJobLink, newJobStatus, userId,
+}) => {
+    const jobExist = await validateJobExist(jobLink, userId);
+    const jobExistNewLink = await validateJobExist(newJobLink, userId);
+    if (!jobExist) return { message: 'Job does not exist' };
+    if (jobExistNewLink) return { message: 'Job already exists' };
+
+    const verifyJob = newJobLink || jobLink;
+
+    jobExist.companyName = newCompanyName;
+    jobExist.jobStatus = newJobStatus;
+    jobExist.jobLink = verifyJob;
+
+    try {
+        await jobExist.save();
+        return jobExist;
+    } catch (error) {
+        return { message: 'Failed to update job' };
+    }
+};
+
 module.exports = {
     getAllUserJobs,
     createJob,
+    updateJob,
 };
