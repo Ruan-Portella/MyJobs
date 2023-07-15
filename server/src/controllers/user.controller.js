@@ -15,7 +15,21 @@ const createJob = async (req, res) => {
     return res.status(201).json(job);
 };
 
+const updateJob = async (req, res) => {
+    const {
+        newCompanyName, jobLink, newJobLink, newJobStatus,
+    } = req.body;
+    const { id } = req.user;
+
+    const job = await userService.updateJob({
+        newCompanyName, jobLink, newJobLink, newJobStatus, userId: id,
+    });
+    if (job.message) return res.status(404).json(job);
+    return res.status(200).json(job);
+};
+
 module.exports = {
     getAllUserJobs,
     createJob,
+    updateJob,
 };
