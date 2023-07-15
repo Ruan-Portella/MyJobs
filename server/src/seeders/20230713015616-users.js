@@ -9,12 +9,12 @@ module.exports = {
             {
                 full_name: 'Ruan Portella',
                 email: 'ruanmorales29@gmail.com',
-                password: 'dasidnasudausn',
+                password: '$2b$10$MqJZiliUM7zVxJL6zNkGfODbD5LnX7f0MQZsXdta0./dPzmdikJPm',
             },
             {
                 full_name: 'Ruan Portella',
                 email: 'ruanportella.dev@gmail.com',
-                password: 'dasidnasudausn',
+                password: '$2b$10$MqJZiliUM7zVxJL6zNkGfODbD5LnX7f0MQZsXdta0./dPzmdikJPm',
             },
         ], {});
     },
