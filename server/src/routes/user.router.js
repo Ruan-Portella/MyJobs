@@ -1,7 +1,7 @@
 const userRouter = require('express').Router();
+const validations = require('../middlewares');
+const userController = require('../controllers/user.controller');
 
-userRouter.post('/', (req, res) => {
-    res.send('Hello World!');
-});
+userRouter.get('/', validations.validateToken, userController.getAllUserJobs);
 
 module.exports = userRouter;
