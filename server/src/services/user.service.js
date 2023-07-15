@@ -43,16 +43,18 @@ const updateJob = async ({
 
     const verifyJob = newJobLink || jobLink;
 
-    jobExist.companyName = newCompanyName;
-    jobExist.jobStatus = newJobStatus;
-    jobExist.jobLink = verifyJob;
+    const job = await Job.update(
+        {
+            companyName: newCompanyName,
+            jobStatus: newJobStatus,
+            jobLink: verifyJob,
+        },
+        { where: { jobLink, userId } },
+    );
 
-    try {
-        await jobExist.save();
-        return jobExist;
-    } catch (error) {
-        return { message: 'Failed to update job' };
-    }
+    if (job[0] === 0) return { message: 'Failed to update job' };
+
+    return job;
 };
 
 module.exports = {
