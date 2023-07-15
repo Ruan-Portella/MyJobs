@@ -21,6 +21,19 @@ const getAllUserJobs = async (id) => {
     return jobs;
 };
 
+const validateJobExist = async (companyName, jobLink) => {
+    const job = await Job.findOne({ where: { companyName, jobLink } });
+    return job;
+};
+
+const createJob = async ({ companyName, jobLink, userId }) => {
+    const jobExist = await validateJobExist(companyName, jobLink);
+    if (jobExist) return { message: 'Job already exists' };
+    const job = await Job.create({ companyName, jobLink, userId });
+    return job;
+};
+
 module.exports = {
     getAllUserJobs,
+    createJob,
 };
