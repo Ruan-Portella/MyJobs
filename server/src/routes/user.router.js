@@ -3,5 +3,6 @@ const validations = require('../middlewares');
 const userController = require('../controllers/user.controller');
 
 userRouter.get('/', validations.validateToken, userController.getAllUserJobs);
+userRouter.post('/', validations.validateToken, userController.createJob);
 
 module.exports = userRouter;
