@@ -20,7 +20,7 @@ module.exports = {
             jobLink: {
                 allowNull: false,
                 field: 'job_link',
-                unique: true,
+                primaryKey: true,
                 type: Sequelize.STRING,
             },
             jobStatus: {
@@ -42,6 +42,7 @@ module.exports = {
             userId: {
                 allowNull: false,
                 field: 'user_id',
+                primaryKey: true,
                 onDelete: 'CASCADE',
                 onUpdate: 'CASCADE',
                 references: {
@@ -51,6 +52,12 @@ module.exports = {
                 type: Sequelize.INTEGER,
             },
         });
+
+        // await queryInterface.addConstraint('jobs', {
+        //     fields: ['jobLink', 'userId'],
+        //     type: 'primary key',
+        //     name: 'jobs_pkey',
+        // });
     },
 
     async down(queryInterface) {
