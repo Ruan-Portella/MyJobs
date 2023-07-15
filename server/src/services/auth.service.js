@@ -30,7 +30,7 @@ const signInUser = async (email, password) => {
         const user = await findUserByEmail(email);
         await validatePassword(password, user);
 
-        const token = jwt.sign({ id: user.id, name: user.fullName }, Secret, { algorithm: 'HS256', expiresIn: '300s' });
+        const token = jwt.sign({ id: user.id, name: user.fullName }, Secret, { algorithm: 'HS256', expiresIn: '1d' });
 
         return { name: user.fullName, token };
     } catch (error) {
