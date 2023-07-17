@@ -38,7 +38,9 @@ const updateJob = async ({
 }) => {
     const jobExist = await validateJobExist(jobLink, userId);
     const jobExistNewLink = await validateJobExist(newJobLink, userId);
+
     if (!jobExist) return { message: 'Job does not exist' };
+
     if (jobExistNewLink) return { message: 'Job already exists' };
 
     const verifyJob = newJobLink || jobLink;
@@ -57,8 +59,21 @@ const updateJob = async ({
     return job;
 };
 
+const deleteJob = async (jobLink, userId) => {
+    const jobExist = await validateJobExist(jobLink, userId);
+
+    if (!jobExist) return { message: 'Job does not exist' };
+
+    const job = await Job.destroy({ where: { jobLink, userId } });
+
+    if (job === 0) return { message: 'Failed to delete job' };
+
+    return job;
+};
+
 module.exports = {
     getAllUserJobs,
     createJob,
     updateJob,
+    deleteJob,
 };
