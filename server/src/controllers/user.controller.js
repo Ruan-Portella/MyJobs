@@ -28,8 +28,18 @@ const updateJob = async (req, res) => {
     return res.status(200).json(job);
 };
 
+const deleteJob = async (req, res) => {
+    const { jobLink } = req.body;
+    const { id } = req.user;
+
+    const job = await userService.deleteJob(jobLink, id);
+    if (job.message) return res.status(404).json(job);
+    return res.status(200).json(job);
+};
+
 module.exports = {
     getAllUserJobs,
     createJob,
     updateJob,
+    deleteJob,
 };
