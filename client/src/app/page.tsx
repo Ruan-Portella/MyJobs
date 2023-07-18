@@ -10,6 +10,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { Button, Spinner } from "react-bootstrap";
 import { useEffect, useState } from "react";
+import {GoogleLogin, GoogleOAuthProvider} from '@react-oauth/google';
 import axios from "axios";
 
 interface ISignUpData {
@@ -66,6 +67,7 @@ export default function Home() {
       });
   };
 
+
   const handleChange = (data: IHandleChange) => {
     setSignUpData({
       ...signUpData,
@@ -85,97 +87,121 @@ export default function Home() {
   }, [signUpData]);
 
   return (
-    <main>
-      <Container fluid>
-        <Row className={style.loginContent}>
-          <Col className={style.loginBanner}>
-            <Image
-              className={style.image}
-              src={loginImage}
-              priority
-              alt="jobHunt Login Image"
-            ></Image>
-            <a href="https://storyset.com/job" target="_blank">Job illustrations by Storyset</a>
-          </Col>
-          <Col className={style.loginForm}>
-            
-            <h1>Login</h1>
+    <GoogleOAuthProvider clientId="38065109571-f9kv98u2kdl87meram8qiqtf3059sadl.apps.googleusercontent.com">
+      <main>
+        <Container fluid>
+          <Row className={style.loginContent}>
+            <Col className={style.loginBanner}>
+              <Image
+                className={style.image}
+                src={loginImage}
+                priority
+                alt="jobHunt Login Image"
+              ></Image>
+              <a href="https://storyset.com/job" target="_blank">Job illustrations by Storyset</a>
+            </Col>
+            <Col className={style.loginForm}>
 
-            <Form onSubmit={handleSubmit}>
-              <Row>
-                <Form.Group className="mb-3" controlId="formBasicEmail">
-                  <Form.Label>Email</Form.Label>
-                  <Form.Control
-                    type="email"
-                    value={signUpData.email}
-                    isValid={validatedFields.email}
-                    isInvalid={!validatedFields.email}
-                    onChange={({ target }) =>
-                      handleChange({name: "email", value: target.value})
-                    }
-                    placeholder="Enter email"
-                  />
-                </Form.Group>
-              </Row>
-
-              <Row>
-                <Form.Group className="mb-3" controlId="formBasicPassword">
-                  <Form.Label>Password</Form.Label>
-                  <Form.Control
-                    type="password"
-                    value={signUpData.password}
-                    isValid={validatedFields.password}
-                    isInvalid={!validatedFields.password}
-                    onChange={({ target }) =>
-                      handleChange({name: "password", value: target.value})
-                    }
-                    placeholder="Password"
-                  />
-                </Form.Group>
-              </Row>
-
-              <Row>
-                <Form.Group className="mb-3">
-                  <Form.Check
-                    type="checkbox"
-                    label="Manter Conectado"
-                    id="checkbox-remember"
-                    onClick={() =>
-                      handleChange({name: "remember", value: !signUpData.remember})
-                    }
-                  />
-                </Form.Group>
-              </Row>
-
-              <Row>
-                <Form.Text>
-                  {error && <p className={style.error}>{error}</p>}
-                </Form.Text>
-              </Row>
-
-              <Row>
-                <Button
-                  type="submit"
-                  className={style.buttonForm}
-                  disabled={ loading || !validatedFields.email || !validatedFields.password }
-                >
-                  {loading ? (
-                    <Spinner animation="border" variant="light" size="sm" />
-                  ) : (
-                    "Entrar"
-                  )}
-                </Button>
-              </Row>
-
-              <Row>
+              <Row className={style.formTitle}>
+                <h1>Login</h1>
                 <Form.Text className="text-muted">
                     Não tem uma conta? <a href="/signUp" >Inscrever-se</a>
                 </Form.Text>
               </Row>
-            </Form>
-          </Col>
-        </Row>
-      </Container>
-    </main>
+
+              <Form onSubmit={handleSubmit}>
+                <Row>
+                  <Form.Group className="mb-3" controlId="formBasicEmail">
+                    <Form.Label>Email</Form.Label>
+                    <Form.Control
+                      type="email"
+                      value={signUpData.email}
+                      isValid={validatedFields.email}
+                      isInvalid={!validatedFields.email}
+                      onChange={({ target }) =>
+                        handleChange({name: "email", value: target.value})
+                      }
+                      placeholder="Enter email"
+                    />
+                  </Form.Group>
+                </Row>
+
+                <Row>
+                  <Form.Group className="mb-3" controlId="formBasicPassword">
+                    <Form.Label>Password</Form.Label>
+                    <Form.Control
+                      type="password"
+                      value={signUpData.password}
+                      isValid={validatedFields.password}
+                      isInvalid={!validatedFields.password}
+                      onChange={({ target }) =>
+                        handleChange({name: "password", value: target.value})
+                      }
+                      placeholder="Password"
+                    />
+                  </Form.Group>
+                </Row>
+
+                <Row>
+                  <Form.Group className="mb-3">
+                    <Form.Check
+                      type="checkbox"
+                      label="Manter Conectado"
+                      id="checkbox-remember"
+                      onClick={() =>
+                        handleChange({name: "remember", value: !signUpData.remember})
+                      }
+                    />
+                  </Form.Group>
+                </Row>
+
+                <Row>
+                  <Form.Text>
+                    {error && <p className={style.error}>{error}</p>}
+                  </Form.Text>
+                </Row>
+
+                <Row>
+                  <Button
+                    type="submit"
+                    className={style.buttonForm}
+                    disabled={ loading || !validatedFields.email || !validatedFields.password }
+                  >
+                    {loading ? (
+                      <Spinner animation="border" variant="light" size="sm" />
+                    ) : (
+                      "Entrar"
+                    )}
+                  </Button>
+                </Row>
+
+              </Form>
+              <Row>
+                <Form.Text className="text-muted">
+                  Ou entre com
+                </Form.Text>
+              </Row>
+              <GoogleLogin
+                onSuccess={async credentialResponse => {
+                  await axios.post('http://localhost:3001/signWithGoogle', {
+                    credential: credentialResponse.credential,
+                  }).then((response) => {
+                    localStorage.setItem("token", response.data.token);
+                    localStorage.setItem("user", response.data.name);
+                    router.push("http://localhost:3000/user");
+                  })
+                    .catch((error) => {
+                      console.log(error);     
+                    });
+                }}
+                onError={() => {
+                  console.log('Login Failed');
+                }}/>
+            </Col>
+          </Row>
+        </Container>
+      </main>
+    </GoogleOAuthProvider>
+
   );
 }
