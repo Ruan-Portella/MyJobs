@@ -10,8 +10,8 @@ const signUpUser = async (req, res) => {
 };
 
 const signInUser = async (req, res) => {
-    const { email, password } = req.body;
-    const response = await authService.signInUser(email, password);
+    const { email, password, remember } = req.body;
+    const response = await authService.signInUser(email, password, remember);
     if (response.message) return res.status(400).json({ message: response.message });
     return res.status(200).json(response);
 };
