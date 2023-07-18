@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "prestart": "npm run db:create && npm run up && npm run seed",
+    "prestart": "npm run db:drop && npm run db:create && npm run up && npm run seed",
     "dev": "nodemon src/server.js",
     "seed": "npx sequelize db:seed:all",
     "unseed": "npx sequelize db:seed:undo:all",
