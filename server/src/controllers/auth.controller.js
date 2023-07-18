@@ -1,4 +1,5 @@
 const bcrypt = require('bcrypt');
+const jwtDecode = require('jwt-decode');
 const authService = require('../services/auth.service');
 
 const signUpUser = async (req, res) => {
@@ -17,8 +18,9 @@ const signInUser = async (req, res) => {
 };
 
 const signWithGoogle = async (req, res) => {
-    const { fullName, email, googleId } = req.body;
-    const response = await authService.signWithGoogle(fullName, email, googleId);
+    const { credential } = req.body;
+    const decoded = jwtDecode(credential);
+    const response = await authService.signWithGoogle(decoded.name, decoded.email, decoded.sub);
     if (response.message) return res.status(400).json({ message: response.message });
     return res.status(200).json(response);
 };
