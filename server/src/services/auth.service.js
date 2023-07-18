@@ -26,7 +26,8 @@ const validatePassword = async (password, user) => {
 };
 
 const verifyIfIsGoogleUser = async (email) => {
-    const user = await findUserByEmail(email);
+    const user = await User.findOne({ where: { email } });
+    if (!user) return true;
     if (user.googleId) throw new Error('You have to sign in with Google');
     return true;
 };
