@@ -25,11 +25,18 @@ const validatePassword = async (password, user) => {
     return passwordValidate;
 };
 
+const verifyIfIsGoogleUser = async (email) => {
+    const user = await findUserByEmail(email);
+    if (user.googleId) throw new Error('You have to sign in with Google');
+    return true;
+};
+
 const signInUser = async (email, password, remember) => {
     try {
         const config = remember ? { algorithm: 'HS256', expiresIn: '30d' } : { algorithm: 'HS256', expiresIn: '1h' };
 
         const user = await findUserByEmail(email);
+
         await validatePassword(password, user);
 
         const token = jwt.sign({ id: user.id, name: user.fullName }, Secret, config);
@@ -40,7 +47,26 @@ const signInUser = async (email, password, remember) => {
     }
 };
 
+const signWithGoogle = async (fullName, email, googleId) => {
+    try {
+        const [user, created] = await User.findOrCreate({
+            where: { email },
+            defaults: { fullName, email, googleId },
+        });
+
+        const newUser = user || created;
+
+        const token = jwt.sign({ id: newUser.id, name: newUser.fullName }, Secret, { algorithm: 'HS256', expiresIn: '30d' });
+
+        return { name: user.fullName, token };
+    } catch (error) {
+        return { message: error.message };
+    }
+};
+
 module.exports = {
     signUpUser,
     signInUser,
+    signWithGoogle,
+    verifyIfIsGoogleUser,
 };
