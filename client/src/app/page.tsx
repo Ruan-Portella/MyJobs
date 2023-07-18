@@ -43,6 +43,7 @@ export default function Home() {
     event.preventDefault();
 
     setLoading(true);
+    setError('');
 
     await axios
       .post("http://localhost:3001/", {
@@ -94,7 +95,7 @@ export default function Home() {
               priority
               alt="jobHunt Login Image"
             ></Image>
-            <a href="https://storyset.com/job">Job illustrations by Storyset</a>
+            <a href="https://storyset.com/job" target="_blank">Job illustrations by Storyset</a>
           </Col>
           <Col className={style.loginForm}>
             
@@ -121,7 +122,7 @@ export default function Home() {
                 <Form.Group className="mb-3" controlId="formBasicPassword">
                   <Form.Label>Password</Form.Label>
                   <Form.Control
-                    type="text"
+                    type="password"
                     value={signUpData.password}
                     isValid={validatedFields.password}
                     isInvalid={!validatedFields.password}
@@ -168,7 +169,7 @@ export default function Home() {
 
               <Row>
                 <Form.Text className="text-muted">
-                    Não tem uma conta? <a href="/signUp">Inscrever-se</a>
+                    Não tem uma conta? <a href="/signUp" >Inscrever-se</a>
                 </Form.Text>
               </Row>
             </Form>
