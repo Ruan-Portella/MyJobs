@@ -12,6 +12,11 @@ module.exports = {
                 primaryKey: true,
                 type: Sequelize.INTEGER,
             },
+            googleId: {
+                type: Sequelize.STRING,
+                field: 'google_id',
+                allowNull: true,
+            },
             fullName: {
                 allowNull: false,
                 type: Sequelize.STRING,
@@ -23,7 +28,7 @@ module.exports = {
                 unique: true,
             },
             password: {
-                allowNull: false,
+                allowNull: true,
                 type: Sequelize.STRING,
             },
         });
