@@ -25,12 +25,14 @@ const validatePassword = async (password, user) => {
     return passwordValidate;
 };
 
-const signInUser = async (email, password) => {
+const signInUser = async (email, password, remember) => {
     try {
+        const config = remember ? { algorithm: 'HS256', expiresIn: '30d' } : { algorithm: 'HS256', expiresIn: '1h' };
+
         const user = await findUserByEmail(email);
         await validatePassword(password, user);
 
-        const token = jwt.sign({ id: user.id, name: user.fullName }, Secret, { algorithm: 'HS256', expiresIn: '1d' });
+        const token = jwt.sign({ id: user.id, name: user.fullName }, Secret, config);
 
         return { name: user.fullName, token };
     } catch (error) {
