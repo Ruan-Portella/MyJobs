@@ -16,7 +16,15 @@ const signInUser = async (req, res) => {
     return res.status(200).json(response);
 };
 
+const signWithGoogle = async (req, res) => {
+    const { fullName, email, googleId } = req.body;
+    const response = await authService.signWithGoogle(fullName, email, googleId);
+    if (response.message) return res.status(400).json({ message: response.message });
+    return res.status(200).json(response);
+};
+
 module.exports = {
     signUpUser,
     signInUser,
+    signWithGoogle,
 };
