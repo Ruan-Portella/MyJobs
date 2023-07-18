@@ -2,6 +2,8 @@ const authRouter = require('express').Router();
 const validations = require('../middlewares');
 const authController = require('../controllers/auth.controller');
 
+authRouter.post('/signWithGoogle', authController.signWithGoogle);
+
 authRouter.post(
     '/signUp',
     validations.validateName,
