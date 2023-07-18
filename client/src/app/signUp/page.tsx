@@ -74,6 +74,9 @@ export default function SignUp() {
         if (error.response.data.message === 'Validation error') {
           setError('Email já cadastrado');
         }
+        if (error.response.data.message === 'You have to sign in with Google') {
+          setError('Você já tem um conta pelo Google, tente logar com o Google');
+        }
       })
       .finally(() => {
         setLoading(false);
