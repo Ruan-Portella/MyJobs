@@ -13,6 +13,10 @@ import { Button, Spinner } from "react-bootstrap";
 import { useEffect, useState } from "react";
 import axios from "axios";
 
+
+const HOST = process.env.REACT_APP_API_HOST || "localhost:3001";
+const PROTOCOL = process.env.REACT_APP_API_PROTOCOL || "http";
+
 interface ISignUpData {
   email: string;
   password: string;
@@ -48,7 +52,7 @@ export default function SignUp() {
     setError('');
 
     await axios
-      .post("http://localhost:3001/signUp", {
+      .post(`${PROTOCOL}://${HOST}/signUp`, {
         email: signUpData.email,
         password: signUpData.password,
         fullName: signUpData.fullName,
