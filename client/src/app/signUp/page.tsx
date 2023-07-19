@@ -14,8 +14,8 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 
 
-const HOST = process.env.REACT_APP_API_HOST || "localhost:3001";
-const PROTOCOL = process.env.REACT_APP_API_PROTOCOL || "http";
+const HOST = process.env.NEXT_PUBLIC_API_HOST || "localhost:3001";
+const PROTOCOL = process.env.NEXT_PUBLIC_API_PROTOCOL || "http";
 
 interface ISignUpData {
   email: string;
