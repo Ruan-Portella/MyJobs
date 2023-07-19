@@ -129,7 +129,7 @@ export default function Home() {
                       onChange={({ target }) =>
                         handleChange({name: "email", value: target.value})
                       }
-                      placeholder="Enter email"
+                      placeholder="Enter Email"
                     />
                   </Form.Group>
                 </Row>
