@@ -59,7 +59,7 @@ export default function Home() {
       .then((response) => {
         localStorage.setItem("token", response.data.token);
         localStorage.setItem("user", response.data.name);
-        router.push(`${PROTOCOL}://${HOST}/user`);
+        router.push(`https://ample-cushion-production.up.railway.app/user`);
       })
       .catch((error) => {
         if (error.response.data.message === 'Wrong password') {
