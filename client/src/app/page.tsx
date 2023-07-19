@@ -12,6 +12,10 @@ import { Button, Spinner } from "react-bootstrap";
 import { useEffect, useState } from "react";
 import {GoogleLogin, GoogleOAuthProvider} from '@react-oauth/google';
 import axios from "axios";
+import Swal from "sweetalert2";
+
+const HOST = process.env.REACT_APP_API_HOST || "localhost:3001";
+const PROTOCOL = process.env.REACT_APP_API_PROTOCOL || "http";
 
 interface ISignUpData {
   email: string;
@@ -47,7 +51,7 @@ export default function Home() {
     setError('');
 
     await axios
-      .post("http://localhost:3001/", {
+      .post(`${PROTOCOL}://${HOST}`, {
         email: signUpData.email,
         password: signUpData.password,
         remember: signUpData.remember,
@@ -55,11 +59,14 @@ export default function Home() {
       .then((response) => {
         localStorage.setItem("token", response.data.token);
         localStorage.setItem("user", response.data.name);
-        router.push("http://localhost:3000/user");
+        router.push(`${PROTOCOL}://${HOST}/user`);
       })
       .catch((error) => {
         if (error.response.data.message === 'Wrong password') {
           setError('Senha ou Usuário incorretos');
+        }
+        if (error.response.data.message === 'You have to sign in with Google') {
+          setError('Você possui uma conta pelo Google, faça login com o nosso botão do Google');
         }
       })
       .finally(() => {
@@ -183,12 +190,31 @@ export default function Home() {
               </Row>
               <GoogleLogin
                 onSuccess={async credentialResponse => {
-                  await axios.post('http://localhost:3001/signWithGoogle', {
+                  await axios.post(`${PROTOCOL}://${HOST}/signWithGoogle`, {
                     credential: credentialResponse.credential,
                   }).then((response) => {
+
                     localStorage.setItem("token", response.data.token);
                     localStorage.setItem("user", response.data.name);
-                    router.push("http://localhost:3000/user");
+
+                    if (response.status === 200) {
+                      let timerInterval: any;
+                      Swal.fire({
+                        icon: 'success',
+                        title: 'Você conseguiu fazer login!',
+                        html: 'Sendo redirecionado em poucos instantes.',
+                        allowOutsideClick: false,
+                        timer: 2000,
+                        timerProgressBar: true,
+                        didOpen: () => {
+                          Swal.showLoading();
+                        },
+                        willClose: () => {
+                          clearInterval(timerInterval);
+                          router.push(`${PROTOCOL}://${HOST}/user`);
+                        }
+                      });
+                    }
                   })
                     .catch((error) => {
                       console.log(error);     
@@ -202,6 +228,5 @@ export default function Home() {
         </Container>
       </main>
     </GoogleOAuthProvider>
-
   );
 }
