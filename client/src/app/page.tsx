@@ -44,6 +44,7 @@ export default function Home() {
   const [error, setError] = useState<string>("");
   const [validatedFields, setValidateFields] = useState<IValidateFields>({ email: false, password: false });
   const router = useRouter();
+  console.log(CLIENTID);
 
   const handleSubmit = async (event: any) => {
     event.preventDefault();
