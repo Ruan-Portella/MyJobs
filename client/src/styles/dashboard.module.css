@@ -1,0 +1,84 @@
+.main {
+    display: flex;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+}
+
+.userInput {
+   margin: 20px 110px 20px 110px
+}
+
+.dashBoardRow {
+    margin: 10px 50px 0px 50px
+}
+
+.dashBoardCol {
+    display: flex;
+    justify-content: center;
+}
+
+.inputGroup {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+}
+
+.formControl {
+    width: 70% !important;
+    flex: 0 0 auto !important;
+}
+
+.dashBoardTable {
+    width: 90%;
+}
+
+.input {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.button {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.thOperations {
+    display: flex;
+    gap: 5px;
+    justify-content: center;
+}
+
+
+@media only screen and (max-width: 1280px) {
+    .main {
+        display: flex;
+        flex-direction: column-reverse;
+    }
+
+    .dashBoardRow {
+        margin: 10px 0px 0px 0px
+    }
+
+    .userInput {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        margin: 20px 0px 20px 0px;
+    }
+
+    .dashBoardTable {
+        overflow-x: auto;
+        width: auto
+    }
+
+    .input {
+        justify-content: center;
+    }
+
+    .button {
+        justify-content: center;
+    }
+};
