@@ -14,9 +14,9 @@ import {GoogleLogin, GoogleOAuthProvider} from '@react-oauth/google';
 import axios from "axios";
 import Swal from "sweetalert2";
 
-const HOST = process.env.REACT_APP_API_HOST || "localhost:3001";
-const PROTOCOL = process.env.REACT_APP_API_PROTOCOL || "http";
-const CLIENTID = process.env.REACT_APP_CLIENT_ID || 'seu_client_id';
+const HOST = process.env.NEXT_PUBLIC_API_HOST || "localhost:3001";
+const PROTOCOL = process.env.NEXT_PUBLIC_API_PROTOCOL || "http";
+const CLIENTID = process.env.NEXT_PUBLIC_CLIENT_ID || 'seu_client_id';
 
 interface ISignUpData {
   email: string;
