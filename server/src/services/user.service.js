@@ -41,7 +41,7 @@ const updateJob = async ({
 
     if (!jobExist) return { message: 'Job does not exist' };
 
-    if (jobExistNewLink) return { message: 'Job already exists' };
+    if (jobExistNewLink && newJobLink !== jobLink) return { message: 'Job already exists' };
 
     const verifyJob = newJobLink || jobLink;
 
