@@ -94,7 +94,7 @@ export default function Home() {
   }, [signUpData]);
 
   return (
-    <GoogleOAuthProvider clientId="38065109571-f9kv98u2kdl87meram8qiqtf3059sadl.apps.googleusercontent.com">
+    <GoogleOAuthProvider clientId={`${process.env.CLIENTID}`}>
       <main>
         <Container fluid>
           <Row className={style.loginContent}>
