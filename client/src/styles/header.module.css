@@ -1,0 +1,120 @@
+.headerContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    width: 18vw;
+    height: 100vh;
+    border-right: 5px solid white;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+.headerNav {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.headerProfile {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    justify-content: center;
+}
+
+.headerProfile h5 {
+    font-size: 16px;
+    font-weight: 500;
+    color: white;
+    margin-bottom: 0;
+}
+
+.HeaderLink {
+    font-size: 16px;
+    font-weight: 500;
+    display: flex;
+    justify-content: center;
+}
+
+.HeaderLink a {
+    color: white
+}
+
+.HeaderLogout a {
+    color: white;
+}
+
+.HeaderIcon {
+    display: flex;
+    gap: 5px;
+    align-items: center;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    color: white;
+    text-decoration: none;
+}
+
+.HeaderIcon:hover {
+    background-color: transparent;
+    border: none;
+}
+
+.dashBoardIcon {
+    color: black;
+}
+
+.HeaderIcon:hover {
+    color: black;
+}
+
+@media only screen and (max-width: 1280px) {
+    .headerContainer {
+        display: flex;
+        flex-flow: row wrap;
+        align-items: center;
+        justify-content: space-around;
+        margin-bottom: 20px;
+        width: 100%;
+        height: auto;
+        bottom: 0;
+        left: 0;
+        position: absolute;
+        border: none;
+        padding: 0;
+    }
+
+    .headerNav {
+        display: inline;
+    }
+
+    .headerProfile {
+        display: none;
+    }
+
+    .HeaderLink {
+        font-size: 16px;
+        font-weight: 500;
+        display: flex;
+        justify-content: center;
+    }
+
+    .HeaderLink a {
+        color: white
+    }
+
+    .HeaderLogout a {
+        color: white;
+    }
+
+    .HeaderIcon {
+        display: flex;
+        gap: 5px;
+        align-items: center;
+    }
+
+    .dashBoardIcon {
+        color: black;
+    }
+}
