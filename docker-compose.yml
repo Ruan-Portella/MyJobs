@@ -1,6 +1,22 @@
 version: '3'
 
 services:
+  frontend:
+    build: 
+      context: ./client
+      dockerfile: Dockerfile
+    container_name: client_container
+    ports:
+      - 3000:3000 # porta padrão da aplicação
+    command: dev
+    env_file:
+      - ./client/.env
+    volumes:
+      # vincula pasta local com a dentro do container
+      - ./client/src:/app/client/src
+      - ./client/public:/app/client/public
+    depends_on:
+      - backend
   backend:
     build: 
       context: ./server
@@ -11,7 +27,7 @@ services:
     command: dev # roda aplicação com nodemon
     volumes:
       # vincula pasta local com a dentro do container
-      - ./server/src:/app/src
+      - ./server/src:/app/server/src
     env_file:
       - ./server/.env
     depends_on:
