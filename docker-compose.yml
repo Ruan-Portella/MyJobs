@@ -10,7 +10,7 @@ services:
       - 3000:3000 # porta padrão da aplicação
     command: dev
     env_file:
-      - ./client/.env.local
+      - ./client/.env
     volumes:
       # vincula pasta local com a dentro do container
       - ./client/src:/app/client/src
