@@ -16,6 +16,7 @@ import Swal from "sweetalert2";
 
 const HOST = process.env.REACT_APP_API_HOST || "localhost:3001";
 const PROTOCOL = process.env.REACT_APP_API_PROTOCOL || "http";
+const CLIENTID = process.env.REACT_APP_CLIENT_ID || 'seu_client_id';
 
 interface ISignUpData {
   email: string;
@@ -94,7 +95,7 @@ export default function Home() {
   }, [signUpData]);
 
   return (
-    <GoogleOAuthProvider clientId={`${process.env.CLIENTID}`}>
+    <GoogleOAuthProvider clientId={CLIENTID}>
       <main>
         <Container fluid>
           <Row className={style.loginContent}>
