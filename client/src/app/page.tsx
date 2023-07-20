@@ -46,7 +46,6 @@ export default function Home() {
   const router = useRouter();
   console.log(CLIENTID);
   console.log(ruan);
-  console.log(process.env);
 
   const handleSubmit = async (event: any) => {
     event.preventDefault();
