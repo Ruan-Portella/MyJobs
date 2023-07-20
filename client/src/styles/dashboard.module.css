@@ -11,6 +11,20 @@
    margin: 20px 110px 20px 110px
 }
 
+.userInfoBadge {
+    font-size: 0.9rem;
+}
+
+.userInfo {
+    margin: 0 auto;
+    color: white;
+}
+
+.userInfoText {
+    display: flex;
+    margin: 0 auto;
+}
+
 .dashBoardRow {
     margin: 10px 50px 0px 50px
 }
@@ -51,12 +65,42 @@
     justify-content: center;
 }
 
+.editBtn:hover {
+    color: #f0ad4e;
+    cursor: pointer;
+}
+
+.deleteBtn:hover {
+    color: #d9534f;
+    cursor: pointer;
+}
+
+@media only screen and (max-width: 768px) {
+    .userInfo {
+        width: 90%;
+        margin: 0 auto;
+        color: white;
+        display: flex;
+        gap: 5px;
+    }
+
+    .userInfoBadge {
+        font-size: 0.9rem;
+    }
+
+    .userInfoText {
+        width: 40%;
+        justify-content: center;
+        padding: auto;
+    }
+}
 
 @media only screen and (max-width: 1280px) {
     .main {
         display: flex;
         flex-direction: column-reverse;
     }
+    
 
     .dashBoardRow {
         margin: 10px 0px 0px 0px
