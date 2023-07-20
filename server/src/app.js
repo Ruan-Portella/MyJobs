@@ -7,7 +7,7 @@ require('dotenv').config();
 const app = express();
 app.use(express.json());
 app.use(cors({
-    origin: ['https://ample-cushion-production.up.railway.app', 'http://localhost:3000', 'https://myjobs.ruanportella.dev/'],
+    origin: ['https://ample-cushion-production.up.railway.app', 'http://localhost:3000', 'https://myjobs.ruanportella.dev'],
     allowedHeaders: ['Content-Type', 'Authorization'],
 }));
 
