@@ -2,7 +2,7 @@ Este é um projeto para aprendizagem desenvolvido por mim [Ruan Portella](https:
 
 Desenvolvi uma aplicação full Stack para você cadastrar suas candidaturas.
 
-[![Deploy on Railway](https://railway.app/button.svg)](myjobs.ruanportella.dev/)
+[![Deploy on Railway](https://railway.app/button.svg)](https://myjobs.ruanportella.dev/)
 ## Ferramentas :wrench:
 
 - Next.js
