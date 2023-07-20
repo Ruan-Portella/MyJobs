@@ -17,7 +17,6 @@ import Swal from "sweetalert2";
 const HOST = process.env.NEXT_PUBLIC_API_HOST || "localhost:3001";
 const PROTOCOL = process.env.NEXT_PUBLIC_API_PROTOCOL || "http";
 const CLIENTID = process.env.NEXT_PUBLIC_CLIENT_ID || 'seu_client_id';
-const ruan = process.env.ruan || 'ruan2';
 interface ISignUpData {
   email: string;
   password: string;
