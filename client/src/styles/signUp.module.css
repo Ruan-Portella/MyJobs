@@ -47,6 +47,21 @@
     color: red;
 }
 
+.inputPassword {
+    position: relative;
+}
+
+.formPassword {
+    background-image: none !important;
+}
+
+.inputPassword svg {
+    position: absolute;
+    top: 25%;
+    right: 10px;
+}
+
+
 @media only screen and (max-width: 768px) {
     .signUpContent {
         flex-direction: column;

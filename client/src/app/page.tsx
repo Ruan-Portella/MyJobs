@@ -10,6 +10,7 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import { Button, Spinner } from "react-bootstrap";
 import { useEffect, useState } from "react";
+import {AiFillEye, AiFillEyeInvisible} from "react-icons/ai";
 import {GoogleLogin, GoogleOAuthProvider} from '@react-oauth/google';
 import axios from "axios";
 import Swal from "sweetalert2";
@@ -42,6 +43,7 @@ export default function Home() {
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string>("");
   const [validatedFields, setValidateFields] = useState<IValidateFields>({ email: false, password: false });
+  const [showPassword, setShowPassword] = useState<boolean>(false);
   const router = useRouter();
 
   const handleSubmit = async (event: any) => {
@@ -136,16 +138,24 @@ export default function Home() {
                 <Row>
                   <Form.Group className="mb-3" controlId="formBasicPassword">
                     <Form.Label>Password</Form.Label>
-                    <Form.Control
-                      type="password"
-                      value={signUpData.password}
-                      isValid={validatedFields.password}
-                      isInvalid={!validatedFields.password}
-                      onChange={({ target }) =>
-                        handleChange({name: "password", value: target.value})
+                    <div className={style.inputPassword}>
+                      <Form.Control
+                        className={style.formPassword}
+                        type={showPassword ? "text" : "password"}
+                        value={signUpData.password}
+                        isValid={validatedFields.password}
+                        isInvalid={!validatedFields.password}
+                        onChange={({ target }) =>
+                          handleChange({name: "password", value: target.value})
+                        }
+                        placeholder="Password"
+                      />
+                      {
+                        showPassword ? ( <AiFillEyeInvisible size={20} onClick={() => setShowPassword(false)} /> ) : (
+                          <AiFillEye size={20} onClick={() => setShowPassword(true)} />
+                        )
                       }
-                      placeholder="Password"
-                    />
+                    </div>
                   </Form.Group>
                 </Row>
 
