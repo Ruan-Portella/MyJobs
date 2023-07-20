@@ -17,7 +17,8 @@ import Swal from "sweetalert2";
 const HOST = process.env.NEXT_PUBLIC_API_HOST || "localhost:3001";
 const PROTOCOL = process.env.NEXT_PUBLIC_API_PROTOCOL || "http";
 const CLIENTID = process.env.NEXT_PUBLIC_CLIENT_ID || 'seu_client_id';
-const CLIENTIDTESTE = process.env.CLIENT_ID_TESTE;
+const ruan = process.env.ruan || 'ruan2';
+
 interface ISignUpData {
   email: string;
   password: string;
@@ -45,8 +46,7 @@ export default function Home() {
   const [validatedFields, setValidateFields] = useState<IValidateFields>({ email: false, password: false });
   const router = useRouter();
   console.log(CLIENTID);
-  console.log(CLIENTIDTESTE);
-
+  console.log(ruan);
 
   const handleSubmit = async (event: any) => {
     event.preventDefault();
@@ -115,6 +115,7 @@ export default function Home() {
 
               <Row className={style.formTitle}>
                 <h1>Login</h1>
+                <h2>{CLIENTID}</h2>
                 <Form.Text className="text-muted">
                     Não tem uma conta? <a href="/signUp" >Inscrever-se</a>
                 </Form.Text>
