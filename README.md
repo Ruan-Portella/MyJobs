@@ -1,6 +1,8 @@
 Este é um projeto para aprendizagem desenvolvido por mim [Ruan Portella](https://github.com/Ruan-Portella).
 
 Desenvolvi uma aplicação full Stack para você cadastrar suas candidaturas.
+
+[![Deploy on Railway](https://railway.app/button.svg)](myjobs.ruanportella.dev/)
 ## Ferramentas :wrench:
 
 - Next.js
@@ -25,8 +27,8 @@ Desenvolvi uma aplicação full Stack para você cadastrar suas candidaturas.
 
 Para executar a aplicação, você precisará ter instalada em sua máquina as seguintes ferramentas:
 
-- Node.js ou Docker
-- MySQL 
+- Localmente: Node.js e MySQL
+- Com Containers: Docker
 
 <details>
 <summary><strong>🐋 Rodando no Docker vs Localmente</strong></summary>
@@ -90,9 +92,11 @@ cd client && npm install && cd ../server && npm install && cd ..
 
 ### 4 - Crie sua conexão do banco de dados e altere no arquivo config.js na pasta server
 
-`Para continuar sem o Docker você precisa criar uma conexão com o banco de dados mysql e alterar o arquivo config.js na pasta server.`
+`Para continuar sem o Docker você precisa criar uma conexão com o banco de dados mysql.`
 
-`OU Rode o comando abaixo para subir o container do banco de dados`
+`OU`
+
+`Rode o comando abaixo para subir o container do banco de dados`
 
 ```sh
 docker-compose up db -d
