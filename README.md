@@ -124,3 +124,9 @@ cd ./server && npm run dev
 `
 Pronto! Agora é só acessar o localhost:3000 e se divertir!
 `
+
+</details>
+
+## Aplicação no Ar
+
+<img src='https://i.imgur.com/UnpNPCE.png' alt='Aplicação No Ar' /> 
