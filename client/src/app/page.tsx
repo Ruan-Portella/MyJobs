@@ -43,7 +43,6 @@ export default function Home() {
   const [error, setError] = useState<string>("");
   const [validatedFields, setValidateFields] = useState<IValidateFields>({ email: false, password: false });
   const router = useRouter();
-  console.log(CLIENTID);
 
   const handleSubmit = async (event: any) => {
     event.preventDefault();
@@ -112,7 +111,6 @@ export default function Home() {
 
               <Row className={style.formTitle}>
                 <h1>Login</h1>
-                <h2>{CLIENTID}</h2>
                 <Form.Text className="text-muted">
                     Não tem uma conta? <a href="/signUp" >Inscrever-se</a>
                 </Form.Text>
@@ -213,7 +211,7 @@ export default function Home() {
                         },
                         willClose: () => {
                           clearInterval(timerInterval);
-                          router.push(`${PROTOCOL}://${HOST}/user`);
+                          router.push(`https://ample-cushion-production.up.railway.app/user`);
                         }
                       });
                     }

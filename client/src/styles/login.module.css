@@ -62,16 +62,6 @@
     }
 }
 
-@media only screen and (max-width: 768px) {
-    .loginContent {
-        flex-direction: column;
-    }
-
-    .loginBanner {
-       display: none;
-    }
-}
-
 @media only screen and (max-width: 320px) {
 
     .loginForm {
