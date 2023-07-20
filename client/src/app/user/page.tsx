@@ -3,11 +3,12 @@
 import Header from "@/components/Header";
 import styles from '@/styles/dashboard.module.css';
 import axios from "axios";
+import Link from "next/link";
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from "react";
-import { Button, Col, Container, Form, InputGroup, Row, Table } from "react-bootstrap";
+import {  Badge, Button, Col, Container, Form, InputGroup, Row, Table } from "react-bootstrap";
 import { BiEdit, BiTrashAlt } from 'react-icons/bi';
-import {IoMdAdd} from 'react-icons/io';
+import { IoMdAdd } from 'react-icons/io';
 import Swal from "sweetalert2";
 
 const HOST = process.env.NEXT_PUBLIC_API_HOST || "localhost:3001";
@@ -92,8 +93,7 @@ export default function DashBoard() {
           );
         } else if (
           result.dismiss === Swal.DismissReason.cancel
-        ) 
-        {
+        ) {
           Swal.fire(
             'Cancelado!',
             'Seu job foi salvo :)',
@@ -122,7 +122,7 @@ export default function DashBoard() {
           const jobLink = document.getElementById('jobLink') as HTMLInputElement;
 
           if (companyName.value && jobLink.value) {
-                  
+
             await axios.post(`${PROTOCOL}://${HOST}/user`, {
               companyName: companyName.value,
               jobLink: jobLink.value,
@@ -139,7 +139,7 @@ export default function DashBoard() {
                     createdAt: `${new Date().getDate()}/${new Date().getMonth() + 1}/${new Date().getFullYear()} `,
                     jobStatus: 'active',
                   };
-              
+
                   setJobs([...jobs, newJob]);
                   setFilteredJobs([...jobs, newJob]);
                   Swal.fire(
@@ -149,7 +149,7 @@ export default function DashBoard() {
                   );
                 }
               })
-              .catch((err) => {            
+              .catch((err) => {
                 Swal.fire(
                   'Falhou!',
                   `O job não foi criado: ${err.response.data.message}`,
@@ -157,7 +157,7 @@ export default function DashBoard() {
                 );
               }
               );
-          } 
+          }
           else {
             Swal.fire(
               'Falhou!',
@@ -169,7 +169,7 @@ export default function DashBoard() {
       });;
   };
 
-  const updateJob = async (jobLink: string, jobStatus: string, CompanyName: string) => {       
+  const updateJob = async (jobLink: string, jobStatus: string, CompanyName: string) => {
     Swal.fire({
       title: 'Update a new job',
       html: `
@@ -188,7 +188,7 @@ export default function DashBoard() {
       didOpen: () => {
         const newCompanyName = document.getElementById('newCompanyName') as HTMLInputElement;
         const newJobLink = document.getElementById('newJobLink') as HTMLInputElement;
-        const newJobStatus = document.getElementById('newJobStatus') as HTMLInputElement; 
+        const newJobStatus = document.getElementById('newJobStatus') as HTMLInputElement;
         newCompanyName.value = CompanyName;
         newJobLink.value = jobLink;
         newJobStatus.value = jobStatus;
@@ -198,7 +198,7 @@ export default function DashBoard() {
         const token = localStorage.getItem('token');
         const newCompanyName = document.getElementById('newCompanyName') as HTMLInputElement;
         const newJobLink = document.getElementById('newJobLink') as HTMLInputElement;
-        const newJobStatus = document.getElementById('newJobStatus') as HTMLInputElement; 
+        const newJobStatus = document.getElementById('newJobStatus') as HTMLInputElement;
 
         if (result.isConfirmed) {
           if (newCompanyName && newJobLink && newJobStatus) {
@@ -222,7 +222,7 @@ export default function DashBoard() {
                       job.jobStatus = newJobStatus.value;
                     }
                   });
-              
+
                   setJobs([...jobs]);
                   setFilteredJobs([...jobs]);
                   Swal.fire(
@@ -234,7 +234,7 @@ export default function DashBoard() {
               })
               .catch((err) => {
                 console.log(err);
-            
+
                 Swal.fire(
                   'Falhou!',
                   `O job não foi editado: ${err.response.data.message}`,
@@ -277,8 +277,19 @@ export default function DashBoard() {
           </Col>
           <Col className={styles.button}>
             <Button variant="primary" type="submit" onClick={() => createJob()}>
-              <IoMdAdd size={20}/> Add a new job
+              <IoMdAdd size={20} /> Add a new job
             </Button>
+          </Col>
+        </Row>
+        <Row className={styles.userInfo}>
+          <Col className={styles.userInfoText}>
+            <Badge className={styles.userInfoBadge} pill bg="primary">{filteredJobs.length} jobs salvos</Badge>
+          </Col>
+          <Col className={styles.userInfoText}>
+            <Badge className={styles.userInfoBadge} pill bg="success">{filteredJobs.filter((job: any) => job.jobStatus === 'active').length} jobs ativos</Badge>
+          </Col>
+          <Col className={styles.userInfoText}>
+            <Badge className={styles.userInfoBadge} pill bg="danger"> {filteredJobs.filter((job: any) => job.jobStatus === 'rejected').length} jobs rejeitados</Badge>
           </Col>
         </Row>
         <Row className={styles.dashBoardRow}>
@@ -287,6 +298,7 @@ export default function DashBoard() {
               <Table striped bordered hover>
                 <thead>
                   <tr>
+                    <th>#</th>
                     <th>Company Name</th>
                     <th>Job Link</th>
                     <th>Date Saved</th>
@@ -296,17 +308,20 @@ export default function DashBoard() {
                 </thead>
                 <tbody>
                   {
-                    filteredJobs.map((job: any) => {
+                    filteredJobs.map((job: any, index: number) => {
                       return (
                         <tr key={job.jobLink}>
+                          <td>{index + 1}</td>
                           <td>{job.companyName}</td>
-                          <td>{job.jobLink}</td>
+                          <td><Link href={`${job.jobLink}`} target="_blank">{job.jobLink}</Link></td>
                           <td>{job.createdAt}</td>
                           <td>{job.jobStatus}</td>
-                          <td className={styles.thOperations}>
-                            <BiEdit size={20} onClick={() => updateJob(job.jobLink, job.jobStatus, job.companyName)} />
-                            |
-                            <BiTrashAlt size={20} onClick={() => deleteJob(job.jobLink)} />
+                          <td>
+                            <div className={styles.thOperations}>
+                              <BiEdit size={27} className={styles.editBtn}  onClick={() => updateJob(job.jobLink, job.jobStatus, job.companyName)} />
+                              |
+                              <BiTrashAlt size={27} className={styles.deleteBtn} onClick={() => deleteJob(job.jobLink)} />
+                            </div>
                           </td>
                         </tr>
                       );
