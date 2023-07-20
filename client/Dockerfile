@@ -7,7 +7,6 @@ RUN npm install
 
 COPY . .
 
-
 ENTRYPOINT [ "npm", "run" ]
 
 RUN npm run build

@@ -23,7 +23,6 @@ services:
     container_name: server_container
     ports:
       - 3001:3001 # porta padrão da aplicação
-    command: dev # roda aplicação com nodemon
     volumes:
       # vincula pasta local com a dentro do container
       - ./server/src:/app/server/src
