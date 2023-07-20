@@ -90,9 +90,15 @@ cd client && npm install && cd ../server && npm install && cd ..
 
 ### 4 - Crie sua conexão do banco de dados e altere no arquivo config.js na pasta server
 
+`Para continuar sem o Docker você precisa criar uma conexão com o banco de dados mysql e alterar o arquivo config.js na pasta server.`
+
+`OU Rode o comando abaixo para subir o container do banco de dados`
+
+```sh
+docker-compose up db -d
 ```
-Para continuar sem o Docker você precisa criar uma conexão com o banco de dados mysql e alterar o arquivo config.js na pasta server.
-```
+
+
 ### 5 - Gere a tabela do banco de dados
 
 ```sh
