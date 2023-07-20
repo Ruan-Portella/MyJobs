@@ -18,7 +18,6 @@ const HOST = process.env.NEXT_PUBLIC_API_HOST || "localhost:3001";
 const PROTOCOL = process.env.NEXT_PUBLIC_API_PROTOCOL || "http";
 const CLIENTID = process.env.NEXT_PUBLIC_CLIENT_ID || 'seu_client_id';
 const ruan = process.env.ruan || 'ruan2';
-
 interface ISignUpData {
   email: string;
   password: string;
@@ -47,6 +46,7 @@ export default function Home() {
   const router = useRouter();
   console.log(CLIENTID);
   console.log(ruan);
+  console.log(process.env);
 
   const handleSubmit = async (event: any) => {
     event.preventDefault();
