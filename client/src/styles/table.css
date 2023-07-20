@@ -1,0 +1,51 @@
+@media (max-width: 768px) {
+
+    .table {
+        margin-bottom: 50px;
+    }
+
+    .table thead {
+        display: none;
+    }
+
+    .table td {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .table tr {
+        display: block;
+        
+    }
+
+    .table tr:first-of-type {
+        border-radius: 20px 20px 0px 0px;
+    }
+
+    .table tr:last-of-type{
+        border-radius: 0px 0px 20px 20px;
+    }
+
+    .table td:first-of-type {
+        font-weight: bold;
+        font-size: 1.2rem;
+        text-align: center;
+        display: block;
+    }
+
+    
+    tbody tr:first-of-type  td:first-of-type {
+        border-radius: 20px 20px 0px 0px;
+    }
+
+    tbody tr:last-of-type td:last-of-type {
+        border-radius: 0px 0px 20px 20px;
+    }
+
+    .table td:not(:first-of-type):before {
+        content: attr(data-title);
+        margin-right: 20px;
+        display: block;
+        font-weight: bold;
+    }
+}

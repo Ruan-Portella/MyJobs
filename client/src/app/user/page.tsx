@@ -10,6 +10,7 @@ import {  Badge, Button, Col, Container, Form, InputGroup, Row, Table } from "re
 import { BiEdit, BiTrashAlt } from 'react-icons/bi';
 import { IoMdAdd } from 'react-icons/io';
 import Swal from "sweetalert2";
+import '@/styles/table.css';
 
 const HOST = process.env.NEXT_PUBLIC_API_HOST || "localhost:3001";
 const PROTOCOL = process.env.NEXT_PUBLIC_API_PROTOCOL || "http";
@@ -311,12 +312,12 @@ export default function DashBoard() {
                     filteredJobs.map((job: any, index: number) => {
                       return (
                         <tr key={job.jobLink}>
-                          <td>{index + 1}</td>
-                          <td>{job.companyName}</td>
-                          <td><Link href={`${job.jobLink}`} target="_blank">{job.jobLink}</Link></td>
-                          <td>{job.createdAt}</td>
-                          <td>{job.jobStatus}</td>
-                          <td>
+                          <td data-title='#'>{index + 1}</td>
+                          <td data-title='Company Name'>{job.companyName}</td>
+                          <td data-title='Job Link'><Link href={`${job.jobLink}`} target="_blank">{job.jobLink}</Link></td>
+                          <td data-title='Created At'>{job.createdAt}</td>
+                          <td data-title='Job Status'>{job.jobStatus}</td>
+                          <td data-title='Operations'>
                             <div className={styles.thOperations}>
                               <BiEdit size={27} className={styles.editBtn}  onClick={() => updateJob(job.jobLink, job.jobStatus, job.companyName)} />
                               |
