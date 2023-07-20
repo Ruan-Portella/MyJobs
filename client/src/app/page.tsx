@@ -18,6 +18,7 @@ import Swal from "sweetalert2";
 const HOST = process.env.NEXT_PUBLIC_API_HOST || "localhost:3001";
 const PROTOCOL = process.env.NEXT_PUBLIC_API_PROTOCOL || "http";
 const CLIENTID = process.env.NEXT_PUBLIC_CLIENT_ID || 'seu_client_id';
+const HOSTNAME = process.env.NEXT_PUBLIC_HOSTNAME || "localhost:3000";
 interface ISignUpData {
   email: string;
   password: string;
@@ -221,7 +222,7 @@ export default function Home() {
                         },
                         willClose: () => {
                           clearInterval(timerInterval);
-                          router.push(`https://ample-cushion-production.up.railway.app/user`);
+                          router.push(`${HOSTNAME}/user`);
                         }
                       });
                     }
