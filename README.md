@@ -46,7 +46,7 @@ git clone git@github.com:Ruan-Portella/MyJobs.git && cd MyJobs
  Altere o .env.example para .env na pasta client, server e preencha as variáveis de ambiente com as informações do seu banco de dados.
 `
 
-### 3 - Suba o container do banco de dados
+### 3 - Suba o container do banco de dados, back e front
 
 ```sh
 docker-compose up -d
@@ -87,17 +87,29 @@ git clone git@github.com:Ruan-Portella/MyJobs.git && cd MyJobs
 ```sh
 cd client && npm install && cd ../server && npm install && cd ..
 ```
-### 4 - Suba a aplicação
 
-```sh
-cd client && npm run dev & cd ../server && npm run dev & cd ..
+### 4 - Crie sua conexão do banco de dados e altere no arquivo config.js na pasta server
+
+```
+Para continuar sem o Docker você precisa criar uma conexão com o banco de dados mysql e alterar o arquivo config.js na pasta server.
 ```
 ### 5 - Gere a tabela do banco de dados
 
 ```sh
-cd server && npm run prestart
+cd server && npm run prestart && cd ..
 ```
-### 6 - Acesse a aplicação
+### 6 - Suba a aplicação front e back
+
+```sh
+cd client && npm run dev
+```
+
+`Crie outro terminal e rode o comando abaixo`
+
+```sh
+cd ./server && npm run dev
+```
+### 7 - Acesse a aplicação
 
 `
 Pronto! Agora é só acessar o localhost:3000 e se divertir!
