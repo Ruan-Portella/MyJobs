@@ -282,54 +282,68 @@ export default function DashBoard() {
             </Button>
           </Col>
         </Row>
-        <Row className={styles.userInfo}>
-          <Col className={styles.userInfoText}>
-            <Badge className={styles.userInfoBadge} pill bg="primary">{filteredJobs.length} jobs salvos</Badge>
-          </Col>
-          <Col className={styles.userInfoText}>
-            <Badge className={styles.userInfoBadge} pill bg="success">{filteredJobs.filter((job: any) => job.jobStatus === 'active').length} jobs ativos</Badge>
-          </Col>
-          <Col className={styles.userInfoText}>
-            <Badge className={styles.userInfoBadge} pill bg="danger"> {filteredJobs.filter((job: any) => job.jobStatus === 'rejected').length} jobs rejeitados</Badge>
-          </Col>
-        </Row>
+        {
+          filteredJobs.length === 0 ? (
+            <Row className={styles.notJobRow}>
+              <h2 className={styles.notJob}>
+                Nenhuma candidatura salva
+              </h2>
+            </Row>
+          ) : (
+            <Row className={styles.userInfo}>
+              <Col className={styles.userInfoText}>
+                <Badge className={styles.userInfoBadge} pill bg="primary">{filteredJobs.length} jobs salvos</Badge>
+              </Col>
+              <Col className={styles.userInfoText}>
+                <Badge className={styles.userInfoBadge} pill bg="success">{filteredJobs.filter((job: any) => job.jobStatus === 'active').length} jobs ativos</Badge>
+              </Col>
+              <Col className={styles.userInfoText}>
+                <Badge className={styles.userInfoBadge} pill bg="danger"> {filteredJobs.filter((job: any) => job.jobStatus === 'rejected').length} jobs rejeitados</Badge>
+              </Col>
+            </Row>
+          )
+        }
         <Row className={styles.dashBoardRow}>
           <Col className={styles.dashBoardCol}>
             <div className={styles.dashBoardTable}>
-              <Table striped bordered hover>
-                <thead>
-                  <tr>
-                    <th>#</th>
-                    <th>Company Name</th>
-                    <th>Job Link</th>
-                    <th>Date Saved</th>
-                    <th>Status</th>
-                    <th>Operations</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {
-                    filteredJobs.map((job: any, index: number) => {
-                      return (
-                        <tr key={job.jobLink}>
-                          <td data-title='#'>{index + 1}</td>
-                          <td data-title='Company Name'>{job.companyName}</td>
-                          <td data-title='Job Link'><Link href={`${job.jobLink}`} target="_blank">{job.jobLink}</Link></td>
-                          <td data-title='Created At'>{job.createdAt}</td>
-                          <td data-title='Job Status'>{job.jobStatus}</td>
-                          <td data-title='Operations'>
-                            <div className={styles.thOperations}>
-                              <BiEdit size={27} className={styles.editBtn}  onClick={() => updateJob(job.jobLink, job.jobStatus, job.companyName)} />
+              {
+                filteredJobs.length >= 1 && (
+                  <Table striped bordered hover>
+                    <thead>
+                      <tr>
+                        <th>#</th>
+                        <th>Company Name</th>
+                        <th>Job Link</th>
+                        <th>Date Saved</th>
+                        <th>Status</th>
+                        <th>Operations</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {
+                        filteredJobs.map((job: any, index: number) => {
+                          return (
+                            <tr key={job.jobLink} className={filteredJobs.length > 1 ? '' : 'trFirst'}>
+                              <td data-title='#'>{index + 1}</td>
+                              <td data-title='Company Name'>{job.companyName}</td>
+                              <td data-title='Job Link'><Link href={`${job.jobLink}`} target="_blank">{job.jobLink}</Link></td>
+                              <td data-title='Created At'>{job.createdAt}</td>
+                              <td data-title='Job Status'>{job.jobStatus}</td>
+                              <td data-title='Operations'>
+                                <div className={styles.thOperations}>
+                                  <BiEdit size={27} className={styles.editBtn}  onClick={() => updateJob(job.jobLink, job.jobStatus, job.companyName)} />
                               |
-                              <BiTrashAlt size={27} className={styles.deleteBtn} onClick={() => deleteJob(job.jobLink)} />
-                            </div>
-                          </td>
-                        </tr>
-                      );
-                    })
-                  }
-                </tbody>
-              </Table>
+                                  <BiTrashAlt size={27} className={styles.deleteBtn} onClick={() => deleteJob(job.jobLink)} />
+                                </div>
+                              </td>
+                            </tr>
+                          );
+                        })
+                      }
+                    </tbody>
+                  </Table>
+                )
+              }
             </div>
           </Col>
         </Row>

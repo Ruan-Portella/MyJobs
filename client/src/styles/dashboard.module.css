@@ -75,6 +75,17 @@
     cursor: pointer;
 }
 
+.notJobRow {
+    height: 80vh;
+    display: flex;
+    align-items: center;
+    text-align: center;
+}
+
+.notJob {
+    font-size: 2rem;
+}
+
 @media only screen and (max-width: 768px) {
     .userInfo {
         width: 90%;
@@ -82,6 +93,18 @@
         color: white;
         display: flex;
         gap: 5px;
+    }
+
+    .notJobRow {
+        height: 60vh;
+    }
+
+    .formControl {
+        padding: 8px !important;
+    }
+
+    .notJob {
+        font-size: 1.2rem;
     }
 
     .userInfoBadge {

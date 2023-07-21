@@ -48,4 +48,12 @@
         display: block;
         font-weight: bold;
     }
+
+    .trFirst {
+        border-radius: 20px !important;
+    }
+
+    .swal2-html-container {
+        margin: 0 !important;
+    }
 }
