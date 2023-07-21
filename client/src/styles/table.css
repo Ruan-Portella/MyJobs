@@ -1,7 +1,7 @@
 @media (max-width: 768px) {
 
     .table {
-        margin-bottom: 50px;
+        margin-bottom: 60px;
     }
 
     .table thead {
@@ -15,15 +15,8 @@
 
     .table tr {
         display: block;
-        
-    }
-
-    .table tr:first-of-type {
-        border-radius: 20px 20px 0px 0px;
-    }
-
-    .table tr:last-of-type{
-        border-radius: 0px 0px 20px 20px;
+        margin-bottom: 10px;
+        border-radius: 20px;
     }
 
     .table td:first-of-type {
@@ -34,11 +27,11 @@
     }
 
     
-    tbody tr:first-of-type  td:first-of-type {
+    tbody tr  td:first-of-type {
         border-radius: 20px 20px 0px 0px;
     }
 
-    tbody tr:last-of-type td:last-of-type {
+    tbody tr td:last-of-type {
         border-radius: 0px 0px 20px 20px;
     }
 
@@ -52,8 +45,15 @@
     .trFirst {
         border-radius: 20px !important;
     }
+}
 
+@media (max-width: 520px) {
     .swal2-html-container {
-        margin: 0 !important;
+        margin: 0px 0px !important;
+        font-size: 1rem !important;
+    }
+
+    .swal2-input {
+        margin: 20px 0px 10px 0px;
     }
 }
