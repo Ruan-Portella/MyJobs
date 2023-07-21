@@ -71,6 +71,9 @@ export default function Home() {
         if (error.response.data.message === 'You have to sign in with Google') {
           setError('Você possui uma conta pelo Google, faça login com o nosso botão do Google');
         }
+        if (error.response.data.message === 'User not found') {
+          setError('Usuário não encontrado');
+        }
       })
       .finally(() => {
         setLoading(false);
